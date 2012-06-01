@@ -1,0 +1,40 @@
+strength:
+  default: 5
+  modify:
+    health: 0
+    mana: 0
+    armor: 1
+    melee_damage: 1
+    ranged_damage: 0
+    attack_speed: 0
+    move_speed: 0
+dexterity:
+  default: 5
+  modify:
+    health: 0
+    mana: 0
+    armor: 0
+    melee_damage: 0
+    ranged_damage: 1
+    attack_speed: 1
+    move_speed: 1
+vitality:
+  default: 5
+  modify:
+    health: 1
+    mana: 0
+    armor: 1
+    melee_damage: 0
+    ranged_damage: 0
+    attack_speed: 0
+    move_speed: 0
+wisdom:
+  default: 5
+  modify:
+    health: 0
+    mana: 1
+    armor: 0
+    melee_damage: 0
+    ranged_damage: 0
+    attack_speed: 0
+    move_speed: 0

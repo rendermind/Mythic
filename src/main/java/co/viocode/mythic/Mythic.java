@@ -18,6 +18,8 @@ public class Mythic extends JavaPlugin implements Listener {
     
     static public FileConfiguration pluginConfig = null;
     static File pluginConfigFile = null;
+    static public FileConfiguration profileConfig = null;
+    static File profileConfigFile = null;
     
     @Override
     public void onDisable() {
@@ -30,6 +32,8 @@ public class Mythic extends JavaPlugin implements Listener {
 	// setup config files
 	loadPluginConfig();
 	savePluginConfig();
+	loadProfileConfig();
+	saveProfileConfig();
 	
 	// register events
 	getServer().getPluginManager().registerEvents(new MythicListener(), this);
@@ -63,6 +67,32 @@ public class Mythic extends JavaPlugin implements Listener {
 	    pluginConfig.save(pluginConfigFile);
 	} catch (IOException e) {
 	    log.severe("[Mythic] Unable to save plugin config to " + pluginConfigFile);
+	}
+    }
+    
+    // load profile config
+    public FileConfiguration loadProfileConfig() {
+	if (profileConfig == null) {
+	    if (profileConfigFile == null)
+		profileConfigFile = new File(this.getDataFolder(), "profiles.yml");
+	    if (profileConfigFile.exists()) {
+		profileConfig = YamlConfiguration.loadConfiguration(profileConfigFile);
+	    } else {
+		InputStream defConfigStream = getResource("profiles.yml");
+		profileConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	    }
+	}
+	return profileConfig;
+    }
+    
+    // save profile config
+    public void saveProfileConfig() {
+	if (profileConfig == null || profileConfigFile == null)
+	    return;
+	try {
+	    profileConfig.save(profileConfigFile);
+	} catch (IOException e) {
+	    log.severe("[Mythic] Unable to save plugin config to " + profileConfigFile);
 	}
     }
     

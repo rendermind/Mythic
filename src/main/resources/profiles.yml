@@ -1,0 +1,17 @@
+vioviocity:
+  general:
+    level: 0
+    exp: 0
+  attribute:
+    strength: 0
+    dexterity: 0
+    vitality: 0
+    wisdom: 0
+  secondary:
+    health: 0
+    mana: 0
+    armor: 0
+    melee_damage: 0
+    ranged_damage: 0
+    attack_speed: 0
+    move_speed: 0
