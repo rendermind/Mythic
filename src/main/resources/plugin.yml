@@ -1,0 +1,13 @@
+author: vioCode
+description: RPG System
+main: co.viocode.mythic.Mythic
+name: Mythic
+url: http://viocode.co/
+version: 0.0.1
+commands:
+  mythic:
+    description: null
+    usage: /<command>
+permission:
+  mythic.about:
+    description: null
