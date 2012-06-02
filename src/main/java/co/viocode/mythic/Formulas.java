@@ -1,6 +1,7 @@
 package co.viocode.mythic;
 
 import java.util.Set;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class Formulas {
@@ -26,7 +27,7 @@ public class Formulas {
 	return defaultClass;
     }
     
-    static public int getHealth(Player player) {
+    static public int getMaxHealth(Player player) {
 	
 	// initialize variables
 	double health = 0;
@@ -39,6 +40,56 @@ public class Formulas {
 	health += Mythic.attributeConfig.getDouble("luck.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
-	return (int) health;
+	return (int)health;
+    }
+    
+    static public int getMaxMana(Player player) {
+	
+	// initalize variables
+	double mana = 0;
+	
+	// calculate from attributes
+	mana += Mythic.attributeConfig.getDouble("strength.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	mana += Mythic.attributeConfig.getDouble("dexterity.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	mana += Mythic.attributeConfig.getDouble("vitality.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	mana += Mythic.attributeConfig.getDouble("wisdom.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	mana += Mythic.attributeConfig.getDouble("luck.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
+	
+	// return stat
+	return (int)mana;
+    }
+    
+    static public int getHealthRegen(Player player) {
+	
+	// initialize variables
+	double regen = 0;
+	
+	// calculate from attributes
+	regen = 1;
+	
+	// return stat
+	return (int)regen;
+    }
+    
+    static public int getManaRegen(Player player) {
+	
+	// initialize variables
+	double regen = 0;
+	
+	// calculate from attributes
+	regen = 1;
+	
+	// return stat
+	return (int)regen;
+    }
+    
+    static public void updateHealthBar(Player player) {
+	
+	// initialize variables
+	double health = 20 * (Mythic.profileConfig.getInt(player.getName() + ".secondary.health") / (double)getMaxHealth(player));
+	
+	// set player health
+	player.setHealth((int)health);
+	player.sendMessage(ChatColor.RED + "[Mythic] updateHealthBar: " + ChatColor.GOLD + 100 * ((double)player.getHealth() / 20) + "%");
     }
 }

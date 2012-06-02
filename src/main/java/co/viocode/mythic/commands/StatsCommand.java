@@ -42,15 +42,15 @@ public class StatsCommand implements CommandExecutor {
 	    player.sendMessage(ChatColor.GREEN + "-= Stats =-");
 	    player.sendMessage(ChatColor.GREEN + "Lvl: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".general.level"));
 	    player.sendMessage(ChatColor.GREEN + "Exp: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".general.exp"));
-	    player.sendMessage(ChatColor.GREEN + "HP: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".secondary.health") +
-		    " / " + Formulas.getHealth(player));
-	    player.sendMessage(ChatColor.GREEN + "MP: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".secondary.mana") +
-		    " / " + Mythic.profileConfig.getInt(player.getName() + ".secondary.max_mana"));
-	    player.sendMessage(ChatColor.GREEN + "Str: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.strength"));
-	    player.sendMessage(ChatColor.GREEN + "Dex: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity"));
-	    player.sendMessage(ChatColor.GREEN + "Vit: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality"));
-	    player.sendMessage(ChatColor.GREEN + "Wis: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom"));
-	    player.sendMessage(ChatColor.GREEN + "Lck: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.luck"));
+	    player.sendMessage(ChatColor.RED + "HP: " + Mythic.profileConfig.getInt(player.getName() + ".secondary.health") + " / " +
+		    Formulas.getMaxHealth(player));
+	    player.sendMessage(ChatColor.BLUE + "MP: " + Mythic.profileConfig.getInt(player.getName() + ".secondary.mana") + " / " +
+		    Formulas.getMaxMana(player));
+	    player.sendMessage(ChatColor.GOLD + "STR: " + Mythic.profileConfig.getInt(player.getName() + ".attribute.strength"));
+	    player.sendMessage(ChatColor.GOLD + "DEX: " + Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity"));
+	    player.sendMessage(ChatColor.GOLD + "VIT: " + Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality"));
+	    player.sendMessage(ChatColor.GOLD + "WIS: " + Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom"));
+	    player.sendMessage(ChatColor.GOLD + "LCK: " + Mythic.profileConfig.getInt(player.getName() + ".attribute.luck"));
 	    return true;
 	}
 	

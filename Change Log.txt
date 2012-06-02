@@ -1,7 +1,8 @@
 0.0.3
+    Implemented custom health & health regen synced w/ health bar
     Fixed Issue: /stats not displaying stats correctly
 0.0.2
-    Implemented /stats, displays player stats
+    Implemented Command: /stats, displays player stats
     Added config.yml, stores general options
     Added profiles.yml, stores player stats
     Added classes.yml, stores class stats
