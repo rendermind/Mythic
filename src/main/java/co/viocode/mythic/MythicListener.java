@@ -12,16 +12,17 @@ class MythicListener implements Listener {
 	
 	// initialize variables
 	Player player = event.getPlayer();
+	String defaultClass = Formulas.getDefaultClass();
 	
 	// create new profile
 	if (!Mythic.profileConfig.contains(player.getName())) {
 	    Mythic.profileConfig.set(player.getName() + ".general.level", 1);
 	    Mythic.profileConfig.set(player.getName() + ".general.exp", 0);
-	    Mythic.profileConfig.set(player.getName() + ".attribute.strength", Mythic.attributeConfig.getInt("strength.default"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.dexterity", Mythic.attributeConfig.getInt("dexterity.default"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.vitality", Mythic.attributeConfig.getInt("vitality.default"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.wisdom", Mythic.attributeConfig.getInt("wisdom.default"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.luck", Mythic.attributeConfig.getInt("wisdom.default"));
+	    Mythic.profileConfig.set(player.getName() + ".attribute.strength", Mythic.classConfig.getInt(defaultClass + ".attribute.strength"));
+	    Mythic.profileConfig.set(player.getName() + ".attribute.dexterity", Mythic.classConfig.getInt(defaultClass + ".attribute.dexterity"));
+	    Mythic.profileConfig.set(player.getName() + ".attribute.vitality", Mythic.classConfig.getInt(defaultClass + ".attribute.vitality"));
+	    Mythic.profileConfig.set(player.getName() + ".attribute.wisdom", Mythic.classConfig.getInt(defaultClass + ".attribute.wisdom"));
+	    Mythic.profileConfig.set(player.getName() + ".attribute.luck", Mythic.classConfig.getInt(defaultClass + ".attribute.wisdom"));
 	    Mythic.profileConfig.set(player.getName() + ".secondary.health", 0);
 	    Mythic.profileConfig.set(player.getName() + ".secondary.mana", 0);
 	    Mythic.profileConfig.set(player.getName() + ".secondary.armor", 0);
@@ -34,7 +35,7 @@ class MythicListener implements Listener {
 	}
 	
 	// set player stats
-	//player.setHealth(Mythic.profileConfig.getInt(player.getName() + ".secondary.health"));
+	player.setHealth(Formulas.getHealth(player));
     }
     
 }

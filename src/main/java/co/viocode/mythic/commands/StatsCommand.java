@@ -1,5 +1,6 @@
 package co.viocode.mythic.commands;
 
+import co.viocode.mythic.Formulas;
 import co.viocode.mythic.Mythic;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -42,7 +43,7 @@ public class StatsCommand implements CommandExecutor {
 	    player.sendMessage(ChatColor.GREEN + "Lvl: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".general.level"));
 	    player.sendMessage(ChatColor.GREEN + "Exp: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".general.exp"));
 	    player.sendMessage(ChatColor.GREEN + "HP: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".secondary.health") +
-		    " / " + Mythic.profileConfig.getInt(player.getName() + ".secondary.max_health"));
+		    " / " + Formulas.getHealth(player));
 	    player.sendMessage(ChatColor.GREEN + "MP: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".secondary.mana") +
 		    " / " + Mythic.profileConfig.getInt(player.getName() + ".secondary.max_mana"));
 	    player.sendMessage(ChatColor.GREEN + "Str: " + ChatColor.WHITE + Mythic.profileConfig.getInt(player.getName() + ".attribute.strength"));
