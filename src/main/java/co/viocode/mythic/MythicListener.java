@@ -18,24 +18,43 @@ class MythicListener implements Listener {
 	// initialize variables
 	Player player = event.getPlayer();
 	String defaultClass = Formulas.getDefaultClass();
+	String path = null; String path2 = null;
 	
 	// create new profile
 	if (!Mythic.profileConfig.contains(player.getName())) {
-	    Mythic.profileConfig.set(player.getName() + ".general.level", 1);
-	    Mythic.profileConfig.set(player.getName() + ".general.exp", 0);
-	    Mythic.profileConfig.set(player.getName() + ".attribute.strength", Mythic.classConfig.getInt(defaultClass + ".attribute.strength"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.dexterity", Mythic.classConfig.getInt(defaultClass + ".attribute.dexterity"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.vitality", Mythic.classConfig.getInt(defaultClass + ".attribute.vitality"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.wisdom", Mythic.classConfig.getInt(defaultClass + ".attribute.wisdom"));
-	    Mythic.profileConfig.set(player.getName() + ".attribute.luck", Mythic.classConfig.getInt(defaultClass + ".attribute.wisdom"));
-	    Mythic.profileConfig.set(player.getName() + ".secondary.health", Formulas.getMaxHealth(player));
-	    Mythic.profileConfig.set(player.getName() + ".secondary.mana", Formulas.getMaxMana(player));
+	    
+	    // create options
+	    path = player.getName() + ".option.";
+	    Mythic.profileConfig.set(path + "show_health_regen", Boolean.TRUE);
+	    Mythic.profileConfig.set(path + "show_mana_regen", Boolean.TRUE);
+	    
+	    // create general
+	    path = player.getName() + ".general.";
+	    Mythic.profileConfig.set(path + "level", 1);
+	    Mythic.profileConfig.set(path + "exp", 0);
+	    
+	    // create attribute
+	    path = player.getName() + ".attribute."; path2 = defaultClass + ".attribute.";
+	    Mythic.profileConfig.set(path + "strength", Mythic.classConfig.getInt(path2 + "strength"));
+	    Mythic.profileConfig.set(path + "dexterity", Mythic.classConfig.getInt(path2 + "dexterity"));
+	    Mythic.profileConfig.set(path + "vitality", Mythic.classConfig.getInt(path2 + "vitality"));
+	    Mythic.profileConfig.set(path + "wisdom", Mythic.classConfig.getInt(path2 + "wisdom"));
+	    Mythic.profileConfig.set(path + "luck", Mythic.classConfig.getInt(path2 + "wisdom"));
+	    
+	    // create secondary
+	    path = player.getName() + ".secondary.";
+	    Mythic.profileConfig.set(path + "health", Formulas.getMaxHealth(player));
+	    Mythic.profileConfig.set(path + "mana", Formulas.getMaxMana(player));
+	    
+	    // update health bar
+	    Mythic.saveProfileConfig();
+	    Formulas.updateHealthBar(player);
+	    
 	    //Mythic.profileConfig.set(player.getName() + ".secondary.armor", 0);
 	    //Mythic.profileConfig.set(player.getName() + ".secondary.melee_damage", 0);
 	    //Mythic.profileConfig.set(player.getName() + ".secondary.ranged_damage", 0);
 	    //Mythic.profileConfig.set(player.getName() + ".secondary.attack_speed", 0);
 	    //Mythic.profileConfig.set(player.getName() + ".secondary.move_speed", 0);
-	    Mythic.saveProfileConfig();
 	    Mythic.log.info("[Mythic] Created " + player.getName() + " in profiles.yml");
 	}
     }
@@ -83,13 +102,27 @@ class MythicListener implements Listener {
 	
 	// initliaze variables
 	Player player = (Player)event.getEntity();
-	String path = player.getName() + ".secondary.health";
+	String path = null;
 	
-	//
+	// health regen
+	path = player.getName() + ".secondary.health";
 	Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) + Formulas.getHealthRegen(player));
-	if (Mythic.profileConfig.getInt(path) > Formulas.getMaxMana(player))
+	if (Mythic.profileConfig.getInt(path) > Formulas.getMaxHealth(player))
 	    Mythic.profileConfig.set(path, Formulas.getMaxHealth(player));
-	player.sendMessage(ChatColor.RED + "[Mythic] onEntityRegainHealth: " + ChatColor.GOLD + Mythic.profileConfig.getInt(path));
+	else
+	    if (Mythic.profileConfig.getBoolean(player.getName() + ".option.show_health_regen"))
+		player.sendMessage(ChatColor.RED + "HP: " + Mythic.profileConfig.getInt(player.getName() + ".secondary.health") + " / " +
+		    Formulas.getMaxHealth(player) + ", " + ChatColor.GOLD + " +" + Formulas.getHealthRegen(player));
+	
+	// mana regen
+	path = player.getName() + ".secondary.mana";
+	Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) + Formulas.getManaRegen(player));
+	if (Mythic.profileConfig.getInt(path) > Formulas.getMaxMana(player))
+	    Mythic.profileConfig.set(path, Formulas.getMaxMana(player));
+	else
+	    if (Mythic.profileConfig.getBoolean(player.getName() + ".option.show_mana_regen"))
+		player.sendMessage(ChatColor.BLUE + "MP: " + Mythic.profileConfig.getInt(player.getName() + ".secondary.mana") + " / " +
+		    Formulas.getMaxMana(player) + ", " + ChatColor.GOLD + " +" + Formulas.getManaRegen(player));
 	
 	// update health bar
 	event.setAmount(0);

@@ -1,5 +1,6 @@
 0.0.3
     Implemented custom health & health regen synced w/ health bar
+    Implemented mana & mana regen
     Fixed Issue: /stats not displaying stats correctly
 0.0.2
     Implemented Command: /stats, displays player stats
