@@ -1,2 +1,10 @@
+0.0.3
+    
+0.0.2
+    Implemented /stats, displays player stats
+    Added config.yml, stores general options
+    Added profiles.yml, stores player stats
+    Added classes.yml, stores class stats
+    Added attributes.yml, stores attribute calculations
 0.0.1
     Implemented Command: /mythic, displays plugin info

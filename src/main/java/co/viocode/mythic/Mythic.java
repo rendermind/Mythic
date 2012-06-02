@@ -1,6 +1,7 @@
 package co.viocode.mythic;
 
 import co.viocode.mythic.commands.MythicCommand;
+import co.viocode.mythic.commands.StatsCommand;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,10 @@ public class Mythic extends JavaPlugin implements Listener {
     static File pluginConfigFile = null;
     static public FileConfiguration profileConfig = null;
     static File profileConfigFile = null;
+    static public FileConfiguration classConfig = null;
+    static File classConfigFile = null;
+    static public FileConfiguration attributeConfig = null;
+    static File attributeConfigFile = null;
     
     @Override
     public void onDisable() {
@@ -34,12 +39,17 @@ public class Mythic extends JavaPlugin implements Listener {
 	savePluginConfig();
 	loadProfileConfig();
 	saveProfileConfig();
+	loadClassConfig();
+	saveClassConfig();
+	loadAttributeConfig();
+	saveAttributeConfig();
 	
 	// register events
 	getServer().getPluginManager().registerEvents(new MythicListener(), this);
 	
 	// register commands
 	getCommand("mythic").setExecutor(new MythicCommand(this));
+	getCommand("stats").setExecutor(new StatsCommand(this));
 	
 	log.info(this + " is now enabled.");
     }
@@ -60,7 +70,7 @@ public class Mythic extends JavaPlugin implements Listener {
     }
     
     // save plugin config
-    public void savePluginConfig() {
+    static public void savePluginConfig() {
 	if (pluginConfig == null || pluginConfigFile == null)
 	    return;
 	try {
@@ -70,7 +80,7 @@ public class Mythic extends JavaPlugin implements Listener {
 	}
     }
     
-    // load profile config
+    // load profile confie
     public FileConfiguration loadProfileConfig() {
 	if (profileConfig == null) {
 	    if (profileConfigFile == null)
@@ -86,13 +96,65 @@ public class Mythic extends JavaPlugin implements Listener {
     }
     
     // save profile config
-    public void saveProfileConfig() {
+    static public void saveProfileConfig() {
 	if (profileConfig == null || profileConfigFile == null)
 	    return;
 	try {
 	    profileConfig.save(profileConfigFile);
 	} catch (IOException e) {
 	    log.severe("[Mythic] Unable to save plugin config to " + profileConfigFile);
+	}
+    }
+    
+    // load class config
+    public FileConfiguration loadClassConfig() {
+	if (classConfig == null) {
+	    if (classConfigFile == null)
+		classConfigFile = new File(this.getDataFolder(), "classes.yml");
+	    if (classConfigFile.exists()) {
+		classConfig = YamlConfiguration.loadConfiguration(classConfigFile);
+	    } else {
+		InputStream defConfigStream = getResource("classes.yml");
+		classConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	    }
+	}
+	return classConfig;
+    }
+    
+    // save class config
+    static public void saveClassConfig() {
+	if (classConfig == null || classConfigFile == null)
+	    return;
+	try {
+	    classConfig.save(classConfigFile);
+	} catch (IOException e) {
+	    log.severe("[Mythic] Unable to save plugin config to " + attributeConfigFile);
+	}
+    }
+    
+    // load attribute config
+    public FileConfiguration loadAttributeConfig() {
+	if (attributeConfig == null) {
+	    if (attributeConfigFile == null)
+		attributeConfigFile = new File(this.getDataFolder(), "attributes.yml");
+	    if (attributeConfigFile.exists()) {
+		attributeConfig = YamlConfiguration.loadConfiguration(attributeConfigFile);
+	    } else {
+		InputStream defConfigStream = getResource("attributes.yml");
+		attributeConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	    }
+	}
+	return attributeConfig;
+    }
+    
+    // save attribute config
+    static public void saveAttributeConfig() {
+	if (attributeConfig == null || attributeConfigFile == null)
+	    return;
+	try {
+	    attributeConfig.save(attributeConfigFile);
+	} catch (IOException e) {
+	    log.severe("[Mythic] Unable to save plugin config to " + attributeConfigFile);
 	}
     }
     

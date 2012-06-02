@@ -1,13 +1,22 @@
 author: vioCode
-description: RPG System
+description: A true & customized RPG experience.
 main: co.viocode.mythic.Mythic
 name: Mythic
 url: http://viocode.co/
-version: 0.0.1
+version: 0.0.2
 commands:
   mythic:
     description: null
     usage: /<command>
+  stats:
+    description: null
+    usage: /<command>
+  hp:
+    description: null
+    usage: /<command>
+  mp:
+    description: null
+    usage: /<command>
 permission:
-  mythic.about:
+  mythic.stats:
     description: null

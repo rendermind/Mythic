@@ -30,11 +30,6 @@ public class MythicCommand  implements CommandExecutor {
 	String cmd = command.getName().toLowerCase();
 	if (cmd.equals("mythic")) {
 	    
-	    // check permission
-	    if (isPlayer)
-		if (!Mythic.checkPermission("mythic.about", player))
-		    return true;
-	    
 	    // invalid args
 	    if (args.length > 0)
 		return false;
