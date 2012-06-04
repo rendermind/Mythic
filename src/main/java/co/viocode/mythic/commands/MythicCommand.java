@@ -30,15 +30,54 @@ public class MythicCommand  implements CommandExecutor {
 	String cmd = command.getName().toLowerCase();
 	if (cmd.equals("mythic")) {
 	    
-	    // invalid args
-	    if (args.length > 0)
-		return false;
-	    
 	    // <command>
-	    sender.sendMessage(ChatColor.GREEN + plugin.getName() + " v" + plugin.getDescription().getVersion());
-	    sender.sendMessage(ChatColor.GREEN + plugin.getDescription().getDescription());
+	    if (args.length == 0) {
+		sender.sendMessage(ChatColor.GREEN + plugin.getName() + " v" + plugin.getDescription().getVersion());
+		sender.sendMessage(ChatColor.GREEN + plugin.getDescription().getDescription());
+		return true;
+	    }
 	    
-	    return true;
+	    // <command> [show] [hp]
+	    if (args.length == 2 && args[0].equalsIgnoreCase("show") && args[1].equalsIgnoreCase("hp")) {
+		
+		// check permissions
+		if (!Mythic.checkPermission("mythic.stats", player))
+		    return true;
+		
+		// initialize variables
+		String path = player.getName() + ".option.show_health_regen";
+		
+		// toggle option
+		if (Mythic.profileConfig.getBoolean(path)) {
+		    Mythic.profileConfig.set(path, Boolean.FALSE);
+		    player.sendMessage(ChatColor.GREEN + "Show health regeneration " + ChatColor.GOLD + "disabled.");
+		} else {
+		    Mythic.profileConfig.set(path, Boolean.TRUE);
+		    player.sendMessage(ChatColor.GREEN + "Show health regeneration " + ChatColor.GOLD + "enabled.");
+		}
+		return true;
+	    }
+	    
+	    // <command> [show] [mp]
+	    if (args.length == 2 && args[0].equalsIgnoreCase("show") && args[1].equalsIgnoreCase("mp")) {
+		
+		// check permissions
+		if (!Mythic.checkPermission("mythic.stats", player))
+		    return true;
+		
+		// initialize variables
+		String path = player.getName() + ".option.show_mana_regen";
+		
+		// toggle option
+		if (Mythic.profileConfig.getBoolean(path)) {
+		    Mythic.profileConfig.set(path, Boolean.FALSE);
+		    player.sendMessage(ChatColor.GREEN + "Show mana regeneration " + ChatColor.GOLD + " disabled.");
+		} else {
+		    Mythic.profileConfig.set(path, Boolean.TRUE);
+		    player.sendMessage(ChatColor.GREEN + "Show mana regeneration " + ChatColor.GOLD + " enabled.");
+		}
+		return true;
+	    }
 	}
 	
 	// end of command

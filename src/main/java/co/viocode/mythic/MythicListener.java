@@ -1,11 +1,15 @@
 package co.viocode.mythic;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -79,18 +83,40 @@ class MythicListener implements Listener {
 	// initialize variables
 	Player player = (Player)event.getEntity();
 	String path = player.getName() + ".secondary.health";
+	double damage = 0;
 	
-	// 
-	Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) - event.getDamage());
+	// check if creative
+	if (player.getGameMode().equals(GameMode.CREATIVE))
+	    return;
+	
+	// check if dead
+	if (player.getHealth() <= 0)
+	    return;
+	
+	// calculate attacker damage
+	if (event instanceof EntityDamageByEntityEvent) {
+	    EntityDamageByEntityEvent e = (EntityDamageByEntityEvent)event;
+	    if(e.getDamager() instanceof Arrow) {
+		Arrow arrow = (Arrow)e.getDamager();
+		if (arrow.getShooter().getType().equals(EntityType.PLAYER))
+		    e.setDamage(Formulas.getRangedDamage((Player)arrow.getShooter()));
+	    } else if (e.getDamager() instanceof Player) {
+		e.setDamage(Formulas.getMeleeDamage((Player)e.getDamager()));
+	    }
+	}
+	
+	// calculate modified damage
+	damage = event.getDamage() - Formulas.getArmor(player);
+	if (damage < 0)
+	    damage = 0;
+	Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) - damage);
 	if (Mythic.profileConfig.getInt(path) < 0)
 	    Mythic.profileConfig.set(path, 0);
-	player.sendMessage(ChatColor.RED + "[Mythic] onEntityDamage: " + ChatColor.GOLD + event.getDamage());
+	player.sendMessage(ChatColor.LIGHT_PURPLE + "[Mythic] onEntityDamage: " + ChatColor.GOLD + event.getDamage());
 	
 	// update health bar
 	event.setDamage(0);
 	Formulas.updateHealthBar(player);
-	
-	
     }
     
     @EventHandler

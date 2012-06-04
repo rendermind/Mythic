@@ -1,12 +1,16 @@
+0.0.4
+    Added /mythic [show] [hp|mp], toggles the display of health & mana regen
+    Modified player vs player damage based on player attributes
 0.0.3
-    Implemented custom health & health regen synced w/ health bar
-    Implemented mana & mana regen
-    Fixed Issue: /stats not displaying stats correctly
+    Implemented custom health & health regen based on player attributes
+    Implemented mana & mana regen based on player attributes
+    Synced health w/ health bar
+    Fixed /stats not displaying stats correctly
 0.0.2
-    Implemented Command: /stats, displays player stats
+    Implemented /stats, displays player stats
     Added config.yml, stores general options
     Added profiles.yml, stores player stats
     Added classes.yml, stores class stats
     Added attributes.yml, stores attribute calculations
 0.0.1
-    Implemented Command: /mythic, displays plugin info
+    Implemented /mythic, displays plugin info

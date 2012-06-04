@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>co.viocode.mythic</groupId>
     <artifactId>Mythic</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <name>Mythic</name>
     <url>http://viocode.co/</url>
     <repositories>

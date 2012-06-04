@@ -30,7 +30,7 @@ public class Formulas {
     static public int getMaxHealth(Player player) {
 	
 	// initialize variables
-	double health = 0;
+	double health = 10;
 	
 	// calculate from attributes
 	health += Mythic.attributeConfig.getDouble("strength.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
@@ -83,6 +83,42 @@ public class Formulas {
 	return (int)regen;
     }
     
+    static public int getArmor(Player player) {
+	
+	// initialize variables
+	double armor = 0;
+	
+	// calculate from attributes
+	armor = 1;
+	
+	// return stat
+	return (int)armor;
+    }
+    
+    static public int getMeleeDamage(Player player) {
+	
+	// initialize variables
+	double damage = 0;
+	
+	// calculate from attributes
+	damage = 1;
+	
+	// return stat
+	return (int)damage;
+    }
+    
+    static public int getRangedDamage(Player player) {
+	
+	// initialize variables
+	double damage = 0;
+	
+	// calculate from attributes
+	damage = 1;
+	
+	// return stat
+	return (int)damage;
+    }
+    
     static public void updateHealthBar(Player player) {
 	
 	// initialize variables
@@ -90,6 +126,6 @@ public class Formulas {
 	
 	// set player health
 	player.setHealth((int)health);
-	player.sendMessage(ChatColor.RED + "[Mythic] updateHealthBar: " + ChatColor.GOLD + 100 * ((double)player.getHealth() / 20) + "%");
+	player.sendMessage(ChatColor.LIGHT_PURPLE + "[Mythic] updateHealthBar: " + ChatColor.GOLD + 100 * ((double)player.getHealth() / 20) + "%");
     }
 }
