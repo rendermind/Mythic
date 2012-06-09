@@ -34,6 +34,7 @@ public class Formulas {
 	double health = 0;
 	
 	// calculate from attributes
+        health += Mythic.attributeConfig.getDouble("level.health") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	health += Mythic.attributeConfig.getDouble("strength.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	health += Mythic.attributeConfig.getDouble("dexterity.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	health += Mythic.attributeConfig.getDouble("vitality.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -50,6 +51,7 @@ public class Formulas {
 	double mana = 0;
 	
 	// calculate from attributes
+        mana += Mythic.attributeConfig.getDouble("level.mana") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	mana += Mythic.attributeConfig.getDouble("strength.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	mana += Mythic.attributeConfig.getDouble("dexterity.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	mana += Mythic.attributeConfig.getDouble("vitality.mana") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -66,6 +68,7 @@ public class Formulas {
 	double regen = 0;
 	
 	// calculate from attributes
+        regen += Mythic.attributeConfig.getDouble("level.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	regen += Mythic.attributeConfig.getDouble("strength.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	regen += Mythic.attributeConfig.getDouble("dexterity.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	regen += Mythic.attributeConfig.getDouble("vitality.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -82,6 +85,7 @@ public class Formulas {
 	double regen = 0;
 	
 	// calculate from attributes
+        regen += Mythic.attributeConfig.getDouble("level.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	regen += Mythic.attributeConfig.getDouble("strength.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	regen += Mythic.attributeConfig.getDouble("dexterity.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	regen += Mythic.attributeConfig.getDouble("vitality.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -98,6 +102,7 @@ public class Formulas {
 	double armor = 0;
 	
 	// calculate from attributes
+        armor += Mythic.attributeConfig.getDouble("level.armor") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	armor += Mythic.attributeConfig.getDouble("strength.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	armor += Mythic.attributeConfig.getDouble("dexterity.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	armor += Mythic.attributeConfig.getDouble("vitality.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -114,6 +119,7 @@ public class Formulas {
 	double damage = 0;
 	
 	// calculate from attributes
+        damage += Mythic.attributeConfig.getDouble("level.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	damage += Mythic.attributeConfig.getDouble("strength.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	damage += Mythic.attributeConfig.getDouble("dexterity.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	damage += Mythic.attributeConfig.getDouble("vitality.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
@@ -130,6 +136,7 @@ public class Formulas {
 	double damage = 0;
 	
 	// calculate from attributes
+        damage += Mythic.attributeConfig.getDouble("level.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".general.level");
 	damage += Mythic.attributeConfig.getDouble("strength.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
 	damage += Mythic.attributeConfig.getDouble("dexterity.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
 	damage += Mythic.attributeConfig.getDouble("vitality.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");

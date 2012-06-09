@@ -1,3 +1,6 @@
+0.0.6
+    Modified attributes.yml for balancing
+    Disabled experience orbs
 0.0.5
     Added mobs.yml, stores mob health & damage
     Modified player vs mob damage based on config

@@ -7,10 +7,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -169,6 +166,11 @@ class MythicListener implements Listener {
 	// update health bar
 	event.setAmount(0);
 	Formulas.updateHealthBar(player);
+    }
+    
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event) {
+        event.setDroppedExp(0);
     }
     
     @EventHandler

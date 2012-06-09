@@ -62,8 +62,8 @@ public class Mythic extends JavaPlugin implements Listener {
         log.info("[Mythic] Setting mob health...");
         for (World eachWorld : getServer().getWorlds()) {
             for (LivingEntity eachEntity: getServer().getWorld(eachWorld.getUID()).getLivingEntities()) {
-                if (mobConfig.isConfigurationSection(eachEntity.getType().toString()))
-                    eachEntity.setHealth(mobConfig.getInt(eachEntity.getType() + ".hp"));
+                //if (mobConfig.isConfigurationSection(eachEntity.getType().toString()))
+                    //eachEntity.setHealth(mobConfig.getInt(eachEntity.getType() + ".hp"));
             }
         }
 	

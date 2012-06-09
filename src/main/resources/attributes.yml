@@ -1,13 +1,19 @@
+level:
+  health: 0
+  mana: 0
+  health_regen: 0
+  mana_regen: 0
+  armor: 0
+  melee_damage: 0
+  range_damage: 0
 strength:
   health: 0
   mana: 0
   health_regen: 0
   mana_regen: 0
-  armor: 1
-  melee_damage: 1
+  armor: 0
+  melee_damage: 0
   range_damage: 0
-  attack_speed: 0
-  move_speed: 0
 dexterity:
   health: 0
   mana: 0
@@ -15,29 +21,23 @@ dexterity:
   mana_regen: 0
   armor: 0
   melee_damage: 0
-  range_damage: 1
-  attack_speed: 1
-  move_speed: 1
-vitality:
-  health: 1
-  mana: 0
-  health_regen: 0
-  mana_regen: 0
-  armor: 1
-  melee_damage: 0
   range_damage: 0
-  attack_speed: 0
-  move_speed: 0
-wisdom:
+vitality:
   health: 0
-  mana: 1
+  mana: 0
   health_regen: 0
   mana_regen: 0
   armor: 0
   melee_damage: 0
   range_damage: 0
-  attack_speed: 0
-  move_speed: 0
+wisdom:
+  health: 0
+  mana: 0
+  health_regen: 0
+  mana_regen: 0
+  armor: 0
+  melee_damage: 0
+  range_damage: 0
 luck:
   health: 0
   mana: 0
@@ -46,5 +46,3 @@ luck:
   armor: 0
   melee_damage: 0
   range_damage: 0
-  attack_speed: 0
-  move_speed: 0
