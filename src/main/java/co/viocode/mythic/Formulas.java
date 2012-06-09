@@ -2,6 +2,7 @@ package co.viocode.mythic;
 
 import java.util.Set;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class Formulas {
@@ -89,7 +90,7 @@ public class Formulas {
 	double armor = 0;
 	
 	// calculate from attributes
-	armor = 1;
+	armor = 0;
 	
 	// return stat
 	return (int)armor;
@@ -117,6 +118,36 @@ public class Formulas {
 	
 	// return stat
 	return (int)damage;
+    }
+    
+    static public int getMobHealth(EntityType entity) {
+        
+        // initialize variables
+        double health = 0;
+        
+        // calculate from config
+        if (Mythic.mobConfig.isConfigurationSection(entity.toString()))
+            health = Mythic.mobConfig.getDouble(entity.toString() + ".health");
+        else
+            health = 0;
+        
+        // return stat
+        return (int)health;
+    }
+    
+    static public int getMobDamage(EntityType entity) {
+        
+        // initialize variables
+        double damage = 0;
+        
+        // calculate from config
+        if (Mythic.mobConfig.isConfigurationSection(entity.toString()))
+            damage = Mythic.mobConfig.getDouble(entity.toString() + ".damage");
+        else
+            damage = 0;
+        
+        // return stat
+        return (int)damage;
     }
     
     static public void updateHealthBar(Player player) {

@@ -7,11 +7,12 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 class MythicListener implements Listener {
@@ -54,11 +55,6 @@ class MythicListener implements Listener {
 	    Mythic.saveProfileConfig();
 	    Formulas.updateHealthBar(player);
 	    
-	    //Mythic.profileConfig.set(player.getName() + ".secondary.armor", 0);
-	    //Mythic.profileConfig.set(player.getName() + ".secondary.melee_damage", 0);
-	    //Mythic.profileConfig.set(player.getName() + ".secondary.ranged_damage", 0);
-	    //Mythic.profileConfig.set(player.getName() + ".secondary.attack_speed", 0);
-	    //Mythic.profileConfig.set(player.getName() + ".secondary.move_speed", 0);
 	    Mythic.log.info("[Mythic] Created " + player.getName() + " in profiles.yml");
 	}
     }
@@ -77,46 +73,66 @@ class MythicListener implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
 	
 	// check if player
-	if (!event.getEntityType().equals(EntityType.PLAYER))
-	    return;
+        Boolean isPlayer = false;
+        if (event.getEntityType().equals(EntityType.PLAYER))
+            isPlayer = true;
+	//if (!event.getEntityType().equals(EntityType.PLAYER))
+	//    return;
 	
 	// initialize variables
-	Player player = (Player)event.getEntity();
-	String path = player.getName() + ".secondary.health";
-	double damage = 0;
+        Player player = null; String path = null;
+        if (isPlayer) {
+            player = (Player)event.getEntity();
+            path = player.getName() + ".secondary.health";
+        }
 	
 	// check if creative
-	if (player.getGameMode().equals(GameMode.CREATIVE))
-	    return;
+        if (isPlayer)
+            if (player.getGameMode().equals(GameMode.CREATIVE))
+                return;
 	
 	// check if dead
-	if (player.getHealth() <= 0)
-	    return;
+        if (isPlayer)
+            if (player.getHealth() <= 0)
+                return;
 	
 	// calculate attacker damage
 	if (event instanceof EntityDamageByEntityEvent) {
 	    EntityDamageByEntityEvent e = (EntityDamageByEntityEvent)event;
+            
+            // bow & arrow damage
 	    if(e.getDamager() instanceof Arrow) {
 		Arrow arrow = (Arrow)e.getDamager();
-		if (arrow.getShooter().getType().equals(EntityType.PLAYER))
+		if (arrow.getShooter().getType().equals(EntityType.PLAYER)) {
 		    e.setDamage(Formulas.getRangedDamage((Player)arrow.getShooter()));
+                } else {
+		    e.setDamage(Formulas.getMobDamage(arrow.getShooter().getType())); // mob attacking w/ arrow
+                }
+            // player melee damage
 	    } else if (e.getDamager() instanceof Player) {
-		e.setDamage(Formulas.getMeleeDamage((Player)e.getDamager()));
-	    }
+                Player damager = (Player)e.getDamager();
+		e.setDamage(Formulas.getMeleeDamage(damager));
+                damager.sendMessage(ChatColor.LIGHT_PURPLE + "[Mythic] onEntityDamageByEntity: " + ChatColor.GOLD + e.getDamage());
+	    // mob melee damage
+            } else {
+                e.setDamage(Formulas.getMobDamage(e.getEntityType()));
+            }
 	}
 	
 	// calculate modified damage
-	damage = event.getDamage() - Formulas.getArmor(player);
-	if (damage < 0)
-	    damage = 0;
-	Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) - damage);
-	if (Mythic.profileConfig.getInt(path) < 0)
-	    Mythic.profileConfig.set(path, 0);
-	player.sendMessage(ChatColor.LIGHT_PURPLE + "[Mythic] onEntityDamage: " + ChatColor.GOLD + event.getDamage());
+        if (isPlayer) {
+            double damage = event.getDamage() - Formulas.getArmor(player);
+            if (damage < 0)
+                damage = 0;
+            Mythic.profileConfig.set(path, Mythic.profileConfig.getInt(path) - damage);
+            if (Mythic.profileConfig.getInt(path) < 0)
+                Mythic.profileConfig.set(path, 0);
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "[Mythic] onEntityDamage: " + ChatColor.GOLD + event.getDamage());
 	
-	// update health bar
-	event.setDamage(0);
-	Formulas.updateHealthBar(player);
+            // update health bar
+            event.setDamage(0);
+            Formulas.updateHealthBar(player);
+        }
     }
     
     @EventHandler
@@ -153,5 +169,25 @@ class MythicListener implements Listener {
 	// update health bar
 	event.setAmount(0);
 	Formulas.updateHealthBar(player);
+    }
+    
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent event) {
+        
+        // set mob health
+        if (Formulas.getMobHealth(event.getEntityType()) > 0) {
+            event.getEntity().setHealth(Formulas.getMobHealth(event.getEntityType()));
+            Mythic.log.warning("[Mythic] " + event.getEntityType() + ": " + Formulas.getMobHealth(event.getEntityType()));
+        }
+    }
+    
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+	
+	// initialize variables
+	//Player player = event.getPlayer();
+	//Vector vector = player.getLocation().getDirection().setY(0);
+	
+	//player.setVelocity(vector.multiply(1));
     }
 }

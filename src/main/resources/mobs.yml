@@ -1,0 +1,75 @@
+ZOMBIE:
+  hp: 2
+  dmg: 1
+  exp: 1
+SKELETON:
+  hp: 2
+  dmg: 1
+  exp: 1
+SPIDER:
+  hp: 2
+  dmg: 1
+  exp: 1
+CAVE_SPIDER:
+  hp: 2
+  dmg: 1
+  exp: 1
+CREEPER:
+  hp: 2
+  dmg: 1
+  exp: 1
+ENDERMAN:
+  hp: 2
+  dmg: 1
+  exp: 1
+SLIME:
+  hp: 2
+  dmg: 1
+  exp: 1
+SILVER_FISH:
+  hp: 2
+  dmg: 1
+  exp: 1
+PIG_ZOMBIE:
+  hp: 2
+  dmg: 1
+  exp: 1
+GHAST:
+  hp: 2
+  dmg: 1
+  exp: 1
+BLAZE:
+  hp: 2
+  dmg: 1
+  exp: 1
+MAGMA_CUBE:
+  hp: 2
+  dmg: 1
+  exp: 1
+GIANT:
+  hp: 2
+  dmg: 1
+  exp: 1
+ENDER_DRAGON:
+  hp: 2
+  dmg: 1
+  exp: 1
+SNOWMAN:
+  hp: 2
+  dmg: 1
+  exp: 1
+IRON_GOLEM:
+  hp: 2
+  dmg: 1
+  exp: 1
+WOLF:
+  hp: 2
+  dmg: 1
+  exp: 1
+OCELOT:
+  hp: 2
+  dmg: 1
+  exp: 1
+VILLAGER:
+  hp: 2
+  exp: 1

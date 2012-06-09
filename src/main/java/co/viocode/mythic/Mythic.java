@@ -25,6 +25,8 @@ public class Mythic extends JavaPlugin implements Listener {
     static File classConfigFile = null;
     static public FileConfiguration attributeConfig = null;
     static File attributeConfigFile = null;
+    static public FileConfiguration mobConfig = null;
+    static File mobConfigFile = null;
     
     @Override
     public void onDisable() {
@@ -43,6 +45,8 @@ public class Mythic extends JavaPlugin implements Listener {
 	saveClassConfig();
 	loadAttributeConfig();
 	saveAttributeConfig();
+        loadMobConfig();
+        saveMobConfig();
 	
 	// register events
 	getServer().getPluginManager().registerEvents(new MythicListener(), this);
@@ -102,7 +106,7 @@ public class Mythic extends JavaPlugin implements Listener {
 	try {
 	    profileConfig.save(profileConfigFile);
 	} catch (IOException e) {
-	    log.severe("[Mythic] Unable to save plugin config to " + profileConfigFile);
+	    log.severe("[Mythic] Unable to save profile config to " + profileConfigFile);
 	}
     }
     
@@ -128,7 +132,7 @@ public class Mythic extends JavaPlugin implements Listener {
 	try {
 	    classConfig.save(classConfigFile);
 	} catch (IOException e) {
-	    log.severe("[Mythic] Unable to save plugin config to " + attributeConfigFile);
+	    log.severe("[Mythic] Unable to save class config to " + attributeConfigFile);
 	}
     }
     
@@ -154,8 +158,34 @@ public class Mythic extends JavaPlugin implements Listener {
 	try {
 	    attributeConfig.save(attributeConfigFile);
 	} catch (IOException e) {
-	    log.severe("[Mythic] Unable to save plugin config to " + attributeConfigFile);
+	    log.severe("[Mythic] Unable to save attribute config to " + attributeConfigFile);
 	}
+    }
+    
+    // load mobs config
+    public FileConfiguration loadMobConfig() {
+        if (mobConfig == null) {
+            if (mobConfigFile == null)
+                mobConfigFile = new File(this.getDataFolder(), "mobs.yml");
+            if (mobConfigFile.exists()) {
+                mobConfig = YamlConfiguration.loadConfiguration(mobConfigFile);
+            } else {
+                InputStream defConfigStream = getResource("mobs.yml");
+                mobConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+            }
+        }
+        return mobConfig;
+    }
+    
+    // save mob config
+    static public void saveMobConfig() {
+        if (mobConfig == null || mobConfigFile == null)
+            return;
+        try {
+            mobConfig.save(mobConfigFile);
+        } catch (IOException e) {
+            log.severe("[Mythic] Unable to save mob config to " + mobConfigFile);
+        }
     }
     
     // check permission node

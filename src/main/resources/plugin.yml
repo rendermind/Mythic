@@ -2,8 +2,9 @@ author: vioCode
 description: A true & customized RPG experience.
 main: co.viocode.mythic.Mythic
 name: Mythic
+load: STARTUP
 url: http://viocode.co/
-version: 0.0.4
+version: 0.0.5
 commands:
   mythic:
     description: null
