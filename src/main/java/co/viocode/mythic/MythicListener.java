@@ -104,7 +104,7 @@ class MythicListener implements Listener {
 	    if(e.getDamager() instanceof Arrow) {
 		Arrow arrow = (Arrow)e.getDamager();
 		if (arrow.getShooter().getType().equals(EntityType.PLAYER)) {
-		    e.setDamage(Formulas.getRangedDamage((Player)arrow.getShooter()));
+		    e.setDamage(Formulas.getRangeDamage((Player)arrow.getShooter()));
                 } else {
 		    e.setDamage(Formulas.getMobDamage(arrow.getShooter().getType())); // mob attacking w/ arrow
                 }

@@ -31,7 +31,7 @@ public class Formulas {
     static public int getMaxHealth(Player player) {
 	
 	// initialize variables
-	double health = 10;
+	double health = 0;
 	
 	// calculate from attributes
 	health += Mythic.attributeConfig.getDouble("strength.health") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
@@ -66,7 +66,11 @@ public class Formulas {
 	double regen = 0;
 	
 	// calculate from attributes
-	regen = 1;
+	regen += Mythic.attributeConfig.getDouble("strength.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	regen += Mythic.attributeConfig.getDouble("dexterity.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	regen += Mythic.attributeConfig.getDouble("vitality.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	regen += Mythic.attributeConfig.getDouble("wisdom.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	regen += Mythic.attributeConfig.getDouble("luck.health_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
 	return (int)regen;
@@ -78,7 +82,11 @@ public class Formulas {
 	double regen = 0;
 	
 	// calculate from attributes
-	regen = 1;
+	regen += Mythic.attributeConfig.getDouble("strength.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	regen += Mythic.attributeConfig.getDouble("dexterity.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	regen += Mythic.attributeConfig.getDouble("vitality.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	regen += Mythic.attributeConfig.getDouble("wisdom.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	regen += Mythic.attributeConfig.getDouble("luck.mana_regen") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
 	return (int)regen;
@@ -90,7 +98,11 @@ public class Formulas {
 	double armor = 0;
 	
 	// calculate from attributes
-	armor = 0;
+	armor += Mythic.attributeConfig.getDouble("strength.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	armor += Mythic.attributeConfig.getDouble("dexterity.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	armor += Mythic.attributeConfig.getDouble("vitality.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	armor += Mythic.attributeConfig.getDouble("wisdom.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	armor += Mythic.attributeConfig.getDouble("luck.armor") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
 	return (int)armor;
@@ -102,19 +114,27 @@ public class Formulas {
 	double damage = 0;
 	
 	// calculate from attributes
-	damage = 1;
+	damage += Mythic.attributeConfig.getDouble("strength.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	damage += Mythic.attributeConfig.getDouble("dexterity.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	damage += Mythic.attributeConfig.getDouble("vitality.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	damage += Mythic.attributeConfig.getDouble("wisdom.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	damage += Mythic.attributeConfig.getDouble("luck.melee_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
 	return (int)damage;
     }
     
-    static public int getRangedDamage(Player player) {
+    static public int getRangeDamage(Player player) {
 	
 	// initialize variables
 	double damage = 0;
 	
 	// calculate from attributes
-	damage = 1;
+	damage += Mythic.attributeConfig.getDouble("strength.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.strength");
+	damage += Mythic.attributeConfig.getDouble("dexterity.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.dexterity");
+	damage += Mythic.attributeConfig.getDouble("vitality.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.vitality");
+	damage += Mythic.attributeConfig.getDouble("wisdom.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.wisdom");
+	damage += Mythic.attributeConfig.getDouble("luck.range_damage") * Mythic.profileConfig.getInt(player.getName() + ".attribute.luck");
 	
 	// return stat
 	return (int)damage;

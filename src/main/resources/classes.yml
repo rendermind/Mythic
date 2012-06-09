@@ -6,4 +6,17 @@ Nomad:
     vitality: 5
     wisdom: 5
     luck: 5
+  weapon:
+    wood: 1
+    stone: 2
+    iron: 3
+    gold: 4
+    diamond: 5
+    bow: 2
+  armor:
+    leather: 1
+    chain: 2
+    iron: 3
+    gold: 4
+    diamond: 5
   ability:

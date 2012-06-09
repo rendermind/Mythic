@@ -1,5 +1,6 @@
 package co.viocode.mythic.commands;
 
+import co.viocode.mythic.Formulas;
 import co.viocode.mythic.Mythic;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,6 +37,18 @@ public class MythicCommand  implements CommandExecutor {
 		sender.sendMessage(ChatColor.GREEN + plugin.getDescription().getDescription());
 		return true;
 	    }
+            
+            // <command> [stats]
+            if (args.length == 1 && args[0].equalsIgnoreCase("stats")) {
+                player.sendMessage(ChatColor.DARK_PURPLE + "Max Health: " + ChatColor.RED + Formulas.getMaxHealth(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Max Mana: " + ChatColor.RED + Formulas.getMaxMana(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Health Regen: " + ChatColor.RED + Formulas.getHealthRegen(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Mana Regen: " + ChatColor.RED + Formulas.getManaRegen(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Armor: " + ChatColor.RED + Formulas.getArmor(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Melee Damage: " + ChatColor.RED + Formulas.getMeleeDamage(player));
+                player.sendMessage(ChatColor.DARK_PURPLE + "Range Damage: " + ChatColor.RED + Formulas.getRangeDamage(player));
+                return true;
+            }
 	    
 	    // <command> [show] [hp]
 	    if (args.length == 2 && args[0].equalsIgnoreCase("show") && args[1].equalsIgnoreCase("hp")) {

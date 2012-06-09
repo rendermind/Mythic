@@ -1,6 +1,7 @@
 0.0.5
     Added mobs.yml, stores mob health & damage
     Modified player vs mob damage based on config
+    All stats based on attributes as defined in attributes.yml
 0.0.4
     Added /mythic [show] [hp|mp], toggles the display of health & mana regen
     Modified player vs player damage based on player attributes

@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,7 +33,7 @@ public class Mythic extends JavaPlugin implements Listener {
     
     @Override
     public void onDisable() {
-	log.info(this + " is now disabled.");
+	log.info("[Mythic] Plugin is now disabled");
     }
 
     @Override
@@ -54,8 +57,17 @@ public class Mythic extends JavaPlugin implements Listener {
 	// register commands
 	getCommand("mythic").setExecutor(new MythicCommand(this));
 	getCommand("stats").setExecutor(new StatsCommand(this));
+        
+        // set mob health
+        log.info("[Mythic] Setting mob health...");
+        for (World eachWorld : getServer().getWorlds()) {
+            for (LivingEntity eachEntity: getServer().getWorld(eachWorld.getUID()).getLivingEntities()) {
+                if (mobConfig.isConfigurationSection(eachEntity.getType().toString()))
+                    eachEntity.setHealth(mobConfig.getInt(eachEntity.getType() + ".hp"));
+            }
+        }
 	
-	log.info(this + " is now enabled.");
+	log.info("[Mythic] Plugin is now enabled");
     }
     
     // load plugin config
